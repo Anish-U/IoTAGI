@@ -1,0 +1,35 @@
+<%- include ('../partials/header') %>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-3">
+                <p class="lead">IOT-AGI SERVICES</p>
+            </div>
+            <div class="col-md-9">
+                <div class="thumbnail">
+                    <img class="img-responsive" src="<%= service.image %>">
+                    <div class="caption-full">
+                        <h2>
+                            <%=service.name%>
+                        </h2>
+                        <p>
+                            <%= service.description %>
+                        </p>
+                        <h4>
+                            <%= service.price %> INR
+                        </h4>
+                        <p>Submitted by
+                            <%= service.author.username %>
+                        </p>
+                        <% if(currentUser&&service.author.id.equals(currentUser._id)) { %>
+                            <a href="/services/<%=service._id%>/edit" class="btn btn-warning">Edit</a>
+                            <form class="delete-form" action="/services/<%=service._id%>?_method=DELETE" method="POST">
+                                <button class="btn btn-danger">Delete</button>
+                            </form>
+                            <% }%>
+                    </div>
+                </div>
+                <a href="/services">Go Back</a>
+            </div>
+        </div>
+    </div>
+    <%- include ('../partials/footer') %>

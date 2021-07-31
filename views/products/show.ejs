@@ -1,0 +1,35 @@
+<%- include ('../partials/header') %>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-3">
+                <p class="lead">IOT-AGI PRODUCTS</p>
+            </div>
+            <div class="col-md-9">
+                <div class="thumbnail">
+                    <img class="img-responsive" src="<%= product.image %>">
+                    <div class="caption-full">
+                        <h2>
+                            <%=product.name%>
+                        </h2>
+                        <p>
+                            <%= product.description %>
+                        </p>
+                        <h4>
+                            <%= product.price %> INR
+                        </h4>
+                        <p>Submitted by
+                            <%= product.author.username %>
+                        </p>
+                        <% if(currentUser&&product.author.id.equals(currentUser._id)) { %>
+                            <a href="/products/<%=product._id%>/edit" class="btn btn-warning">Edit</a>
+                            <form class="delete-form" action="/products/<%=product._id%>?_method=DELETE" method="POST">
+                                <button class="btn btn-danger">Delete</button>
+                            </form>
+                            <% }%>
+                    </div>
+                </div>
+                <a href="/products">Go Back</a>
+            </div>
+        </div>
+    </div>
+    <%- include ('../partials/footer') %>

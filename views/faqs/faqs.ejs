@@ -1,0 +1,36 @@
+<%- include ("../partials/header") %>
+<div class="container">
+  <header class="jumbotron">
+    <div class="container">
+      <h1>Welcome To IOTAGI FAQs SECTION</h1>
+      <p>
+        <a class="btn btn-primary btn-large" href="/faqs/new">Add New FAQ</a>
+      </p>
+    </div>
+  </header>
+  <div class="row text-center" style="display: flex; flex-wrap: wrap">
+    <% faqs.forEach(function(faq){ %>
+    <div class="col-md-4 col-sm-6">
+      <div class="thumbnail">
+        <div class="caption">
+          <h4><%= faq.question %></h4>
+        </div>
+        <p><%= faq.answer %></p>
+        <% if(currentUser && faq.author.id.equals(currentUser._id)) { %>
+        <a href="/faqs/<%=faq._id%>/edit" class="btn btn-warning">Edit</a>
+        <form
+          class="delete-form"
+          action="/faqs/<%=faq._id%>?_method=DELETE"
+          method="POST"
+        >
+          <button class="btn btn-danger">Delete</button>
+        </form>
+        <% }else {%>
+        <p><%= faq.author.username %></p>
+        <% }%>
+      </div>
+    </div>
+    <% }); %>
+  </div>
+</div>
+<%- include ("../partials/footer") %>
